@@ -702,3 +702,21 @@ body {
 .archive-page {
   margin-top: 0.5rem;
 }
+
+
+/* Categories/Tags pages are rendered inside minima .post / .post-content wrappers */
+.page-content article.post,
+.page-content article.post .post-content,
+.page-content article.post .post-header {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.page-content article.post .post-header {
+  margin-bottom: 1rem !important;
+  padding-bottom: 0 !important;
+}

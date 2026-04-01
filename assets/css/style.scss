@@ -135,6 +135,9 @@ body {
 .meta-panel,
 .lead-panel {
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
   border-radius: 18px;
   padding: 1rem 1.1rem;
 }
@@ -344,7 +347,8 @@ body {
 }
 
 .footer-chip-group.compact {
-  margin-top: 0.4rem;
+  margin-top: 0.25rem;
+  gap: 0.25rem;
 }
 
 .tag-chip {
@@ -643,4 +647,22 @@ body {
 
 .post-content code {
   color-scheme: light !important;
+}
+
+.post-categories a,
+.post-card-categories a,
+.post-tags-inline a,
+.footer-chip-group a,
+.tag-chip {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  font-size: 0.88rem !important;
+}
+
+.meta-panel .tag-chip,
+.meta-panel a,
+.post-tags-box .tag-chip {
+  font-size: 0.82rem !important;
 }

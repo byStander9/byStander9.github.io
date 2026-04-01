@@ -13,7 +13,7 @@ layout: default
 
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
 
-    <div class="meta-panel-grid">
+    <div class="meta-panel-grid section-divider-top">
       <div class="meta-panel">
         <span class="meta-panel-label">Published</span>
         <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
@@ -41,14 +41,14 @@ layout: default
     </div>
 
     {% if page.summary %}
-      <div class="lead-panel">
+      <div class="lead-panel section-divider-top">
         <span class="meta-panel-label">Summary</span>
         <p class="post-lead">{{ page.summary }}</p>
       </div>
     {% endif %}
   </header>
 
-  <div class="post-content e-content content-panel" itemprop="articleBody">
+  <div class="post-content e-content content-panel section-divider-shell" itemprop="articleBody">
     {{ content }}
   </div>
 
@@ -62,7 +62,7 @@ layout: default
       </div>
     </div>
     {% if page.tags and page.tags != empty %}
-    <div>
+    <div class="section-divider-top footer-section-split">
       <strong>Tags</strong>
       <div class="footer-chip-group">
         {% for tag in page.tags %}

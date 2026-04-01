@@ -10,7 +10,7 @@ layout: default
     <span class="section-subtle">최신 글 목록</span>
   </div>
 
-  <div class="post-grid">
+  <div class="post-grid with-dividers">
     {% assign sorted_posts = site.posts %}
     {% for post in sorted_posts %}
       {% include post-card.html post=post %}

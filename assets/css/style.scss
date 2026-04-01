@@ -546,3 +546,37 @@ body {
     font-size: 1.95rem;
   }
 }
+
+
+.with-dividers {
+  border-top: 1px solid var(--line);
+  padding-top: 1.2rem;
+}
+
+.section-divider-top {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.section-divider-shell {
+  border-top: 1px solid var(--line-strong);
+}
+
+.footer-section-split {
+  margin-top: 1rem;
+}
+
+.post-content > h2:first-child,
+.post-content > p:first-child,
+.post-content > ul:first-child,
+.post-content > ol:first-child,
+.post-content > pre:first-child,
+.post-content > blockquote:first-child {
+  margin-top: 0;
+}
+
+.post-content > * + h2,
+.post-content > * + h3 {
+  margin-top: 2.4rem;
+}

@@ -609,3 +609,38 @@ body {
 .post-content pre .s2 {
   color: #86efac !important;
 }
+
+
+.post-content pre,
+.post-content .highlight,
+.post-content .highlighter-rouge,
+.post-content div.highlight {
+  background: #ffffff !important;
+  color: #111827 !important;
+  color-scheme: light !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+.post-content pre code,
+.post-content .highlight pre,
+.post-content .highlight code,
+.post-content .highlighter-rouge code,
+.post-content .highlighter-rouge pre,
+.post-content div.highlight pre,
+.post-content div.highlight code,
+.post-content pre *,
+.post-content .highlight *,
+.post-content .highlighter-rouge * {
+  background: transparent !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+  text-shadow: none !important;
+}
+
+.post-content pre {
+  border: 2px solid #0f172a !important;
+}
+
+.post-content code {
+  color-scheme: light !important;
+}

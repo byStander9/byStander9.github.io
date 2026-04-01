@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<article class="post-detail h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <p class="post-meta-label">POST</p>
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <div class="post-meta-row">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%Y.%m.%d" }}
+      </time>
+      {% if page.categories and page.categories != empty %}
+        <span class="post-categories">
+          {% for category in page.categories %}
+            <span class="post-category">#{{ category }}</span>
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+    {% if page.summary %}
+      <p class="post-lead">{{ page.summary }}</p>
+    {% endif %}
+    {% if page.repo_url %}
+      <p class="post-repo-link"><a href="{{ page.repo_url }}">관련 레포 바로가기 →</a></p>
+    {% endif %}
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+</article>

@@ -1,0 +1,13 @@
+title: byStander's Blog
+description: 개발 기록, 설치 메모, 실험 로그를 정리하는 블로그
+url: "https://bystander9.github.io"
+baseurl: ""
+lang: ko
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+header_pages:
+  - about.md
+show_excerpts: true

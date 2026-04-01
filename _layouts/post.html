@@ -3,7 +3,7 @@ layout: default
 ---
 
 <article class="post-detail h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header class="post-header">
+  <header class="post-header section-panel">
     <div class="post-header-top">
       <p class="post-meta-label">POST</p>
       {% if page.repo_url %}
@@ -13,37 +13,46 @@ layout: default
 
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
 
-    <div class="post-meta-row">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: "%Y.%m.%d" }}
-      </time>
-      {% if page.categories and page.categories != empty %}
-        <span class="post-categories">
+    <div class="meta-panel-grid">
+      <div class="meta-panel">
+        <span class="meta-panel-label">Published</span>
+        <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+          {{ page.date | date: "%Y.%m.%d" }}
+        </time>
+      </div>
+      <div class="meta-panel">
+        <span class="meta-panel-label">Categories</span>
+        <div class="footer-chip-group compact">
           {% for category in page.categories %}
-            <a class="post-category" href="{{ site.baseurl }}categories/#{{ category | slugify }}">#{{ category }}</a>
+            <a class="tag-chip" href="{{ site.baseurl }}categories/#{{ category | slugify }}">#{{ category }}</a>
           {% endfor %}
-        </span>
+        </div>
+      </div>
+      {% if page.tags and page.tags != empty %}
+      <div class="meta-panel meta-panel-wide">
+        <span class="meta-panel-label">Tags</span>
+        <div class="footer-chip-group compact">
+          {% for tag in page.tags %}
+            <a class="tag-chip" href="{{ site.baseurl }}tags/#{{ tag | slugify }}">#{{ tag }}</a>
+          {% endfor %}
+        </div>
+      </div>
       {% endif %}
     </div>
 
     {% if page.summary %}
-      <p class="post-lead">{{ page.summary }}</p>
-    {% endif %}
-
-    {% if page.tags and page.tags != empty %}
-      <div class="post-tags-box">
-        {% for tag in page.tags %}
-          <a class="tag-chip" href="{{ site.baseurl }}tags/#{{ tag | slugify }}">#{{ tag }}</a>
-        {% endfor %}
+      <div class="lead-panel">
+        <span class="meta-panel-label">Summary</span>
+        <p class="post-lead">{{ page.summary }}</p>
       </div>
     {% endif %}
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
+  <div class="post-content e-content content-panel" itemprop="articleBody">
     {{ content }}
   </div>
 
-  <footer class="post-footer-box">
+  <footer class="post-footer-box section-panel">
     <div>
       <strong>Category</strong>
       <div class="footer-chip-group">

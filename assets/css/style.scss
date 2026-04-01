@@ -414,7 +414,7 @@ body {
 
 .post-content pre code {
   background: transparent;
-  color: #e5e7eb;
+  color: #f8fafc;
   padding: 0;
 }
 
@@ -579,4 +579,33 @@ body {
 .post-content > * + h2,
 .post-content > * + h3 {
   margin-top: 2.4rem;
+}
+
+
+.post-content pre,
+.post-content pre code,
+.post-content pre code span,
+.highlight,
+.highlight pre,
+.highlight code,
+.highlight .w {
+  color: #f8fafc !important;
+}
+
+.post-content pre .c,
+.post-content pre .c1,
+.post-content pre .cm {
+  color: #cbd5e1 !important;
+}
+
+.post-content pre .k,
+.post-content pre .kd,
+.post-content pre .nt {
+  color: #93c5fd !important;
+}
+
+.post-content pre .s,
+.post-content pre .s1,
+.post-content pre .s2 {
+  color: #86efac !important;
 }

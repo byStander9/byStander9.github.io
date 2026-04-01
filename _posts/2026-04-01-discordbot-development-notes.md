@@ -3,7 +3,7 @@ layout: post
 title: "discordBot 개발 기록"
 date: 2026-04-01 12:25:00 +0900
 categories: [discord, bot, python]
-tags: [discord, bot, python, music-bot, yt-dlp, ffmpeg]
+tags: [music-bot, yt-dlp, ffmpeg]
 summary: "Discord 음악 봇 레포를 기준으로 현재 구조, 구현된 기능, 실제 개발에서 중요했던 포인트를 정리한 글."
 repo_url: "https://github.com/byStander9/discordBot"
 ---

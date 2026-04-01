@@ -3,7 +3,7 @@ layout: post
 title: "OpenClaw 설치 및 설정 기록"
 date: 2026-03-31 20:47:00 +0900
 categories: [openclaw, ubuntu, automation]
-tags: [openclaw, ubuntu, automation, notion, gmail, discord]
+tags: [notion, gmail, discord]
 summary: "Ubuntu에서 OpenClaw를 설치하고 onboard, Google Workspace, Notion, GitHub, Discord 준비까지 실제로 연결해 본 기록."
 repo_url: "https://github.com/byStander9/openclaw-setup-playbook"
 ---

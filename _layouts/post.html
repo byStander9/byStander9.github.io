@@ -4,8 +4,15 @@ layout: default
 
 <article class="post-detail h-entry" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <p class="post-meta-label">POST</p>
+    <div class="post-header-top">
+      <p class="post-meta-label">POST</p>
+      {% if page.repo_url %}
+        <a class="post-header-repo" href="{{ page.repo_url }}">Repository ↗</a>
+      {% endif %}
+    </div>
+
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+
     <div class="post-meta-row">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: "%Y.%m.%d" }}
@@ -13,20 +20,47 @@ layout: default
       {% if page.categories and page.categories != empty %}
         <span class="post-categories">
           {% for category in page.categories %}
-            <span class="post-category">#{{ category }}</span>
+            <a class="post-category" href="{{ site.baseurl }}categories/#{{ category | slugify }}">#{{ category }}</a>
           {% endfor %}
         </span>
       {% endif %}
     </div>
+
     {% if page.summary %}
       <p class="post-lead">{{ page.summary }}</p>
     {% endif %}
-    {% if page.repo_url %}
-      <p class="post-repo-link"><a href="{{ page.repo_url }}">관련 레포 바로가기 →</a></p>
+
+    {% if page.tags and page.tags != empty %}
+      <div class="post-tags-box">
+        {% for tag in page.tags %}
+          <a class="tag-chip" href="{{ site.baseurl }}tags/#{{ tag | slugify }}">#{{ tag }}</a>
+        {% endfor %}
+      </div>
     {% endif %}
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
+
+  <footer class="post-footer-box">
+    <div>
+      <strong>Category</strong>
+      <div class="footer-chip-group">
+        {% for category in page.categories %}
+          <a class="tag-chip" href="{{ site.baseurl }}categories/#{{ category | slugify }}">#{{ category }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    {% if page.tags and page.tags != empty %}
+    <div>
+      <strong>Tags</strong>
+      <div class="footer-chip-group">
+        {% for tag in page.tags %}
+          <a class="tag-chip" href="{{ site.baseurl }}tags/#{{ tag | slugify }}">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </footer>
 </article>

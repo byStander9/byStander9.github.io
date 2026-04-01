@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+{{ content }}
+
+<section class="section-block">
+  <div class="section-heading-row">
+    <h2 class="section-heading">Recent Posts</h2>
+    <span class="section-subtle">최신 글 목록</span>
+  </div>
+
+  <div class="post-grid">
+    {% assign sorted_posts = site.posts %}
+    {% for post in sorted_posts %}
+      {% include post-card.html post=post %}
+    {% endfor %}
+  </div>
+</section>

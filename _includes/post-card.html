@@ -1,0 +1,33 @@
+<article class="post-card">
+  <div class="post-card-meta">
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+    {% if post.categories and post.categories != empty %}
+      <span class="post-card-categories">
+        {% for category in post.categories %}
+          <a href="{{ site.baseurl }}categories/#{{ category | slugify }}">#{{ category }}</a>
+        {% endfor %}
+      </span>
+    {% endif %}
+  </div>
+
+  <h2 class="post-card-title">
+    <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+  </h2>
+
+  {% if post.summary %}
+    <p class="post-excerpt">{{ post.summary }}</p>
+  {% else %}
+    <div class="post-excerpt">{{ post.excerpt }}</div>
+  {% endif %}
+
+  <div class="post-card-footer">
+    <a class="read-more" href="{{ post.url | relative_url }}">계속 읽기 →</a>
+    {% if post.tags and post.tags != empty %}
+      <div class="post-tags-inline">
+        {% for tag in post.tags limit: 4 %}
+          <a href="{{ site.baseurl }}tags/#{{ tag | slugify }}">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</article>

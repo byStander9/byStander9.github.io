@@ -666,3 +666,24 @@ body {
 .post-tags-box .tag-chip {
   font-size: 0.82rem !important;
 }
+
+
+/* Flatten meta boxes around category/tag areas */
+.meta-panel,
+.meta-panel-wide,
+.lead-panel {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0.2rem 0 !important;
+}
+
+.meta-panel-grid {
+  gap: 0.45rem !important;
+}
+
+.meta-panel .meta-panel-label,
+.lead-panel .meta-panel-label {
+  margin-bottom: 0.18rem;
+}

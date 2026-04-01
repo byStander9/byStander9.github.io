@@ -464,7 +464,8 @@ body {
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  padding-bottom: 0.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid rgba(15,23,42,0.22);
 }
 
 .archive-section-header h2 {
@@ -718,4 +719,12 @@ body {
 .page-content article.post .post-header {
   margin-bottom: 1rem !important;
   padding-bottom: 0 !important;
+}
+
+
+.archive-section-header h2 {
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
 }

@@ -32,8 +32,8 @@ title: Home
 
 <section class="section-block compact-links">
   <div class="section-heading-row">
-    <h2 class="section-heading">Featured Repositories</h2>
-    <span class="section-subtle">레포 바로가기</span>
+    <h2 class="section-heading">Pinned Repositories</h2>
+    <span class="section-subtle">대표 레포</span>
   </div>
 
   <div class="home-links repo-grid">

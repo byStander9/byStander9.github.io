@@ -28,8 +28,14 @@
     <a class="read-more repo-post-link" href="{{ repo_post.url | relative_url }}">글 보기 →</a>
   {% endif %}
 
-  <label class="repo-other-toggle">
-    <input type="checkbox" data-repo-other-toggle value="{{ repo.name | escape }}">
-    <span>Other</span>
-  </label>
+  <div class="repo-row-actions">
+    <label class="repo-toggle">
+      <input type="checkbox" data-repo-pin-toggle value="{{ repo.name | escape }}">
+      <span>Pin</span>
+    </label>
+    <label class="repo-toggle">
+      <input type="checkbox" data-repo-other-toggle value="{{ repo.name | escape }}">
+      <span>Other</span>
+    </label>
+  </div>
 </article>

@@ -1,4 +1,5 @@
-<article class="post-card">
+{% assign repo_name = post.repo %}
+<article class="post-card" data-blog-post{% if repo_name %} data-repo="{{ repo_name | escape }}"{% endif %}>
   <div class="post-card-meta">
     <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
     {% if post.categories and post.categories != empty %}

@@ -17,13 +17,15 @@ title: Home
       <span class="hero-panel-label">Posts</span>
       <strong>{{ site.posts | size }}</strong>
     </div>
+    {% if site.data.repositories_generated %}
+    <div class="hero-panel-item">
+      <span class="hero-panel-label">Repos</span>
+      <strong>{{ site.data.repositories_generated | size }}</strong>
+    </div>
+    {% endif %}
     <div class="hero-panel-item">
       <span class="hero-panel-label">Categories</span>
       <strong>{{ site.categories | size }}</strong>
-    </div>
-    <div class="hero-panel-item">
-      <span class="hero-panel-label">Tags</span>
-      <strong>{{ site.tags | size }}</strong>
     </div>
   </div>
 </section>
@@ -35,13 +37,21 @@ title: Home
   </div>
 
   <div class="home-links repo-grid">
-    <a href="https://github.com/byStander9/openclaw-setup-playbook">
-      <strong>openclaw-setup-playbook</strong>
-      <span>OpenClaw 설치와 연동 기록</span>
-    </a>
-    <a href="https://github.com/byStander9/discordBot">
-      <strong>discordBot</strong>
-      <span>Python 기반 Discord 음악 봇</span>
-    </a>
+    {% assign featured_repos = site.data.repositories_generated | where: "status", "featured" %}
+    {% for repo in featured_repos %}
+      <a href="{{ repo.url }}" data-home-repo data-repo="{{ repo.name | escape }}">
+        <strong>{{ repo.name }}</strong>
+        <span>{{ repo.description | default: repo.language | default: "README와 파일 구조 기반 개발 기록" }}</span>
+      </a>
+    {% else %}
+      <a href="https://github.com/byStander9/openclaw-setup-playbook">
+        <strong>openclaw-setup-playbook</strong>
+        <span>OpenClaw 설치와 연동 기록</span>
+      </a>
+      <a href="https://github.com/byStander9/discordBot">
+        <strong>discordBot</strong>
+        <span>Python 기반 Discord 음악 봇</span>
+      </a>
+    {% endfor %}
   </div>
 </section>

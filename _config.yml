@@ -10,6 +10,9 @@ plugins:
   - jekyll-seo-tag
 header_pages:
   - about.md
+  - repositories.md
+  - other.md
   - categories.md
   - tags.md
 show_excerpts: true
+repo_pr_worker_url: "https://bystander-blog-repo-preferences.workers.dev"

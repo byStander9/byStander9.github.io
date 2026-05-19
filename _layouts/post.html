@@ -9,6 +9,9 @@ layout: default
       {% if page.repo_url %}
         <a class="post-header-repo" href="{{ page.repo_url }}">Repository ↗</a>
       {% endif %}
+      {% if page.readme_draft_url %}
+        <a class="post-header-repo" href="{{ page.readme_draft_url | relative_url }}">README Draft ↗</a>
+      {% endif %}
     </div>
 
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>

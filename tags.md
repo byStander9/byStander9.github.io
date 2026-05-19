@@ -18,7 +18,7 @@ permalink: /tags/
       </div>
       <ul class="archive-post-list">
         {% for post in posts %}
-          <li>
+          <li{% if post.repo %} data-blog-post data-repo="{{ post.repo | escape }}"{% endif %}>
             <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
             <time>{{ post.date | date: "%Y.%m.%d" }}</time>
           </li>

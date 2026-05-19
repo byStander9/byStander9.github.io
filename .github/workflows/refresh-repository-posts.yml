@@ -1,0 +1,35 @@
+name: Refresh repository posts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "24 18 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out blog
+        uses: actions/checkout@v4
+
+      - name: Generate repository posts
+        run: python scripts/generate_repo_posts.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Commit generated changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/repositories_generated.json _data/ai_enrichment_cache.json _posts repo-readmes
+          if git diff --cached --quiet; then
+            echo "No generated changes."
+          else
+            git commit -m "Refresh repository posts"
+            git push
+          fi

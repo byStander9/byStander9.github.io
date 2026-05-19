@@ -5,6 +5,7 @@ date: 2026-03-31 20:47:00 +0900
 categories: [openclaw, ubuntu, automation]
 tags: [notion, gmail, discord]
 summary: "Ubuntu에서 OpenClaw를 설치하고 onboard, Google Workspace, Notion, GitHub, Discord 준비까지 실제로 연결해 본 기록."
+repo: "openclaw-setup-playbook"
 repo_url: "https://github.com/byStander9/openclaw-setup-playbook"
 ---
 

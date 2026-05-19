@@ -1,0 +1,35 @@
+{% assign repo = include.repo %}
+{% assign repo_post = nil %}
+{% for post in site.posts %}
+  {% if post.repo == repo.name or post.repo_url == repo.url %}
+    {% assign repo_post = post %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<article class="repo-row" data-repo-row data-repo="{{ repo.name | escape }}" data-default-status="{{ repo.status | escape }}">
+  <div>
+    <div class="repo-row-top">
+      <a class="repo-row-title" href="{{ repo.url }}">{{ repo.name }}</a>
+      <span class="repo-status repo-status-{{ repo.status }}">{{ repo.status }}</span>
+    </div>
+    <p>{{ repo.description | default: "README와 파일 구조를 기준으로 정리 대상에 포함된 레포." }}</p>
+    <div class="repo-row-meta">
+      {% if repo.language %}
+        <span>{{ repo.language }}</span>
+      {% endif %}
+      {% if repo.pushed_at %}
+        <span>{{ repo.pushed_at | date: "%Y.%m.%d" }}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if repo_post %}
+    <a class="read-more repo-post-link" href="{{ repo_post.url | relative_url }}">글 보기 →</a>
+  {% endif %}
+
+  <label class="repo-other-toggle">
+    <input type="checkbox" data-repo-other-toggle value="{{ repo.name | escape }}">
+    <span>Other</span>
+  </label>
+</article>

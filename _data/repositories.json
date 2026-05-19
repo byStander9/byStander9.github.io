@@ -1,0 +1,23 @@
+{
+  "owner": "byStander9",
+  "excluded_repositories": [
+    "byStander9.github.io"
+  ],
+  "hidden_repositories": [],
+  "featured_repositories": [
+    "discordBot",
+    "openclaw-setup-playbook"
+  ],
+  "include_forks": false,
+  "include_archived": false,
+  "keep_manual_posts": true,
+  "ai_enrichment": {
+    "enabled": true,
+    "provider": "codex_cli",
+    "model": "gpt-5.4-mini",
+    "reasoning_effort": "low",
+    "max_repositories_per_run": 6,
+    "max_input_chars": 24000,
+    "readme_draft_dir": "repo-readmes"
+  }
+}

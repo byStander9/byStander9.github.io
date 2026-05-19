@@ -1,0 +1,15 @@
+name = "bystander-blog-repo-preferences"
+main = "repo-preference-pr-worker.js"
+compatibility_date = "2026-05-19"
+
+[vars]
+BLOG_ORIGIN = "https://bystander9.github.io"
+ALLOWED_GITHUB_LOGIN = "byStander9"
+GITHUB_OWNER = "byStander9"
+GITHUB_REPO = "byStander9.github.io"
+GITHUB_BRANCH = "main"
+
+# Set these as Cloudflare Worker secrets, not plain vars:
+# wrangler secret put GITHUB_CLIENT_ID
+# wrangler secret put GITHUB_CLIENT_SECRET
+# wrangler secret put SESSION_SECRET

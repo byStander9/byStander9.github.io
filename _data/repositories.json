@@ -3,7 +3,21 @@
   "excluded_repositories": [
     "byStander9.github.io"
   ],
-  "hidden_repositories": [],
+  "hidden_repositories": [
+    "JDBC_Study",
+    "JSP_Study",
+    "Jstl_Study",
+    "RankingNations",
+    "SQL_Study",
+    "ServletImageUpload_ex",
+    "Servlet_Command_Study",
+    "fow.kr",
+    "my-first-blog",
+    "pyscript",
+    "web1",
+    "webStudy",
+    "website1"
+  ],
   "featured_repositories": [
     "discordBot",
     "openclaw-setup-playbook"

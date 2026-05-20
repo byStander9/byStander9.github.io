@@ -6,7 +6,7 @@
     "description": null,
     "language": "Python",
     "topics": [],
-    "status": "published",
+    "status": "featured",
     "pushed_at": "2026-05-14T11:02:38Z",
     "updated_at": "2026-05-14T11:02:42Z"
   },
@@ -61,7 +61,7 @@
     "description": "training gpt2 model with bible dataset",
     "language": "Python",
     "topics": [],
-    "status": "published",
+    "status": "featured",
     "pushed_at": "2024-09-12T09:17:17Z",
     "updated_at": "2024-09-12T09:17:20Z"
   },
@@ -83,7 +83,7 @@
     "description": null,
     "language": "JavaScript",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2024-06-08T10:58:51Z",
     "updated_at": "2024-06-08T10:58:54Z"
   },
@@ -105,7 +105,7 @@
     "description": "studying pyscript",
     "language": "HTML",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2023-12-02T11:09:19Z",
     "updated_at": "2023-12-02T09:09:40Z"
   },
@@ -116,7 +116,7 @@
     "description": null,
     "language": "Java",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2023-07-07T03:48:30Z",
     "updated_at": "2023-07-07T03:48:36Z"
   },
@@ -127,7 +127,7 @@
     "description": null,
     "language": "Java",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2023-07-06T15:07:19Z",
     "updated_at": "2023-07-06T07:13:46Z"
   },
@@ -138,7 +138,7 @@
     "description": "Studying Jstl",
     "language": "Java",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2023-07-05T04:09:08Z",
     "updated_at": "2023-07-04T15:00:09Z"
   },
@@ -149,7 +149,7 @@
     "description": "Studying JSP",
     "language": "Java",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2023-07-03T03:13:38Z",
     "updated_at": "2023-07-03T02:16:00Z"
   },
@@ -160,7 +160,7 @@
     "description": "studying JDBC",
     "language": "Java",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2023-07-02T12:37:10Z",
     "updated_at": "2023-06-28T06:15:54Z"
   },
@@ -171,7 +171,7 @@
     "description": "studying_SQL",
     "language": null,
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2023-06-28T05:40:30Z",
     "updated_at": "2023-06-28T05:40:10Z"
   },
@@ -182,7 +182,7 @@
     "description": "studying about webApp",
     "language": "Java",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2020-08-26T08:14:05Z",
     "updated_at": "2020-08-31T15:16:16Z"
   },
@@ -193,7 +193,7 @@
     "description": null,
     "language": "JavaScript",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2019-09-17T07:37:42Z",
     "updated_at": "2019-09-17T07:37:44Z"
   },
@@ -204,7 +204,7 @@
     "description": null,
     "language": "Python",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2019-07-18T01:46:38Z",
     "updated_at": "2019-07-18T01:46:39Z"
   },
@@ -215,7 +215,7 @@
     "description": null,
     "language": "HTML",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2019-07-03T07:50:53Z",
     "updated_at": "2019-07-03T07:50:54Z"
   },
@@ -226,7 +226,7 @@
     "description": null,
     "language": "HTML",
     "topics": [],
-    "status": "published",
+    "status": "hidden",
     "pushed_at": "2019-06-26T04:50:38Z",
     "updated_at": "2019-06-26T04:50:40Z"
   }

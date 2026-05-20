@@ -6,8 +6,8 @@ GitHub Pages 기반 개인 블로그 저장소.
 
 `scripts/generate_repo_posts.py` reads public repositories from `byStander9`, checks README and repository files, and creates generated posts in `_posts`.
 
-- Main exposure is controlled by `_data/repositories.json`.
-- `featured_repositories` stores pinned repositories that appear on the home page.
+- Home pinned repositories are read from the GitHub profile pinned repositories through GraphQL.
+- `featured_repositories` is only a fallback when the GitHub pinned repository lookup is unavailable.
 - `hidden_repositories` is excluded from generated posts and separated on `/repositories/`.
 - `excluded_repositories` is ignored entirely.
 - Existing manual posts are preserved while `keep_manual_posts` is `true`.
@@ -49,7 +49,7 @@ The default model is `gpt-5.4-mini`, chosen as a lower-cost model for periodic w
 
 ## Browser-managed repository display
 
-The `/repositories/` page lets the blog owner pin representative repositories and move repositories into an Other folder from the browser UI.
+The `/repositories/` page lets the blog owner move repositories into an Other folder from the browser UI. Pinned repositories come from the GitHub profile pinned repositories.
 
 There are two layers:
 
@@ -66,7 +66,7 @@ This can run on free tiers for a personal blog:
 ┌────────────────────────────────────────────────────────────────┐
 │ Browser: https://bystander9.github.io/repositories/             │
 │                                                                │
-│  [x] repo-a -> Pin                                             │
+│  GitHub profile pinned repos -> Pinned Repositories            │
 │  [x] repo-b -> Other                                           │
 │  [PR 생성]                                                     │
 └───────────────────────────────┬────────────────────────────────┘
@@ -99,7 +99,7 @@ This can run on free tiers for a personal blog:
 │ GitHub Pages                                                   │
 │                                                                │
 │  1. Rebuilds the blog                                          │
-│  2. featured_repositories appear as Pinned Repositories        │
+│  2. GitHub profile pinned repos appear as Pinned Repositories  │
 │  3. hidden_repositories appear in Other only                   │
 └────────────────────────────────────────────────────────────────┘
 ```

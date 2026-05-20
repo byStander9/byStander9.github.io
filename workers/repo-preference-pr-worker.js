@@ -137,8 +137,6 @@ async function createPreferencePullRequest(request, env) {
 
   const body = await safeJson(request);
   const hiddenRepositories = cleanRepositoryList(body.hidden_repositories || []);
-  const featuredRepositories = cleanRepositoryList(body.featured_repositories || [])
-    .filter((name) => !hiddenRepositories.includes(name));
   const owner = env.GITHUB_OWNER || "byStander9";
   const repo = env.GITHUB_REPO || "byStander9.github.io";
   const branch = env.GITHUB_BRANCH || "main";
@@ -160,7 +158,6 @@ async function createPreferencePullRequest(request, env) {
   );
   const config = JSON.parse(decodeBase64(file.content));
   config.hidden_repositories = hiddenRepositories;
-  config.featured_repositories = featuredRepositories;
 
   await githubFetch(`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`, session.access_token, {
     method: "PUT",
@@ -181,9 +178,6 @@ async function createPreferencePullRequest(request, env) {
       body: [
         "Updates `_data/repositories.json` from the blog repository UI.",
         "",
-        "Pinned repositories:",
-        ...(featuredRepositories.length ? featuredRepositories.map((name) => `- ${name}`) : ["- none"]),
-        "",
         "Repositories moved to Other:",
         ...(hiddenRepositories.length ? hiddenRepositories.map((name) => `- ${name}`) : ["- none"]),
       ].join("\n"),
@@ -194,7 +188,6 @@ async function createPreferencePullRequest(request, env) {
     {
       pull_request_url: pull.html_url,
       hidden_repositories: hiddenRepositories,
-      featured_repositories: featuredRepositories,
     },
     200,
     request,

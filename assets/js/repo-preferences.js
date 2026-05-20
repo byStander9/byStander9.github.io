@@ -2,23 +2,10 @@
   "use strict";
 
   var storageKey = "bystander.repo.other.v1";
-  var pinnedStorageKey = "bystander.repo.pinned.v1";
   var pendingPrKey = "bystander.repo.pendingPr.v1";
 
   function readOtherRepos() {
     return readRepoList(storageKey);
-  }
-
-  function readPinnedRepos() {
-    var saved = readRepoList(pinnedStorageKey);
-    if (saved.length) {
-      return saved;
-    }
-    return Array.prototype.slice.call(document.querySelectorAll('[data-repo-row][data-default-status="featured"]'))
-      .map(function (row) {
-        return row.getAttribute("data-repo");
-      })
-      .sort();
   }
 
   function readRepoList(key) {
@@ -32,10 +19,6 @@
 
   function writeOtherRepos(repos) {
     window.localStorage.setItem(storageKey, JSON.stringify(repos.sort()));
-  }
-
-  function writePinnedRepos(repos) {
-    window.localStorage.setItem(pinnedStorageKey, JSON.stringify(repos.sort()));
   }
 
   function hasRepo(repos, repo) {
@@ -53,17 +36,6 @@
     return next;
   }
 
-  function setPinnedRepo(repos, repo, enabled) {
-    var next = repos.filter(function (item) {
-      return item !== repo;
-    });
-    if (enabled) {
-      next.push(repo);
-    }
-    writePinnedRepos(next);
-    return next;
-  }
-
   function isOtherRepo(row, otherRepos) {
     var repo = row.getAttribute("data-repo");
     return hasRepo(otherRepos, repo) || row.dataset.defaultStatus === "hidden";
@@ -76,7 +48,7 @@
     });
   }
 
-  function setupRepositoryPage(otherRepos, pinnedRepos) {
+  function setupRepositoryPage(otherRepos) {
     var otherList = document.querySelector("[data-repo-other-list]");
     if (!otherList) {
       return;
@@ -96,21 +68,7 @@
         checkbox.checked = hasRepo(otherRepos, repo);
         checkbox.addEventListener("change", function () {
           otherRepos = setRepo(otherRepos, repo, checkbox.checked);
-          if (checkbox.checked) {
-            pinnedRepos = setPinnedRepo(pinnedRepos, repo, false);
-          }
-          applyPreferences(otherRepos, pinnedRepos);
-        });
-      }
-      var pinCheckbox = row.querySelector("[data-repo-pin-toggle]");
-      if (pinCheckbox) {
-        pinCheckbox.checked = hasRepo(pinnedRepos, repo);
-        pinCheckbox.addEventListener("change", function () {
-          pinnedRepos = setPinnedRepo(pinnedRepos, repo, pinCheckbox.checked);
-          if (pinCheckbox.checked) {
-            otherRepos = setRepo(otherRepos, repo, false);
-          }
-          applyPreferences(otherRepos, pinnedRepos);
+          applyPreferences(otherRepos);
         });
       }
     });
@@ -119,8 +77,7 @@
     if (reset) {
       reset.addEventListener("click", function () {
         writeOtherRepos([]);
-        writePinnedRepos([]);
-        applyPreferences([], readPinnedRepos());
+        applyPreferences([]);
       });
     }
 
@@ -132,7 +89,7 @@
     }
   }
 
-  function moveRows(otherRepos, pinnedRepos) {
+  function moveRows(otherRepos) {
     var otherList = document.querySelector("[data-repo-other-list]");
     if (!otherList) {
       return;
@@ -144,11 +101,6 @@
       var shouldMove = isOtherRepo(row, otherRepos);
       if (checkbox) {
         checkbox.checked = shouldMove;
-      }
-      var pinCheckbox = row.querySelector("[data-repo-pin-toggle]");
-      if (pinCheckbox) {
-        pinCheckbox.checked = hasRepo(pinnedRepos, repo) && !shouldMove;
-        pinCheckbox.disabled = shouldMove;
       }
 
       if (shouldMove && row.parentElement !== otherList) {
@@ -190,9 +142,9 @@
     }
   }
 
-  function applyPreferences(otherRepos, pinnedRepos) {
+  function applyPreferences(otherRepos) {
     hideMainContent(otherRepos);
-    moveRows(otherRepos, pinnedRepos);
+    moveRows(otherRepos);
     updateOtherOnlyPage(otherRepos);
   }
 
@@ -243,17 +195,6 @@
     return readOtherRepos();
   }
 
-  function selectedPinnedRepos() {
-    return Array.prototype.slice.call(document.querySelectorAll("[data-repo-pin-toggle]:checked"))
-      .map(function (input) {
-        return input.value;
-      })
-      .filter(function (repo) {
-        return !hasRepo(selectedOtherRepos(), repo);
-      })
-      .sort();
-  }
-
   function setStatus(message, isError) {
     var status = document.querySelector("[data-repo-pr-status]");
     if (!status) {
@@ -272,11 +213,7 @@
     }
 
     var hiddenRepos = selectedOtherRepos();
-    var pinnedRepos = selectedPinnedRepos();
-    window.localStorage.setItem(pendingPrKey, JSON.stringify({
-      hidden_repositories: hiddenRepos,
-      featured_repositories: pinnedRepos,
-    }));
+    window.localStorage.setItem(pendingPrKey, JSON.stringify(hiddenRepos));
     setStatus("GitHub PR 생성을 준비하는 중...", false);
 
     fetch(api + "/api/preferences/pr", {
@@ -287,7 +224,6 @@
       },
       body: JSON.stringify({
         hidden_repositories: hiddenRepos,
-        featured_repositories: pinnedRepos,
         return_url: window.location.href.split("#")[0].split("?")[0],
       }),
     })
@@ -322,10 +258,8 @@
       return;
     }
     try {
-      var parsed = JSON.parse(pending);
-      writeOtherRepos(parsed.hidden_repositories || []);
-      writePinnedRepos(parsed.featured_repositories || []);
-      applyPreferences(readOtherRepos(), readPinnedRepos());
+      writeOtherRepos(JSON.parse(pending));
+      applyPreferences(readOtherRepos());
       createPreferencePullRequest();
     } catch (_error) {
       window.localStorage.removeItem(pendingPrKey);
@@ -334,9 +268,8 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     var otherRepos = readOtherRepos();
-    var pinnedRepos = readPinnedRepos();
-    setupRepositoryPage(otherRepos, pinnedRepos);
-    applyPreferences(otherRepos, pinnedRepos);
+    setupRepositoryPage(otherRepos);
+    applyPreferences(otherRepos);
     resumePendingPr();
   });
 })();

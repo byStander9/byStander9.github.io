@@ -90,6 +90,50 @@ def github_get(path):
         raise RuntimeError(f"GitHub API failed {exc.code}: {path}\n{body}") from exc
 
 
+def github_graphql(query, variables=None):
+    if not TOKEN:
+        return None
+
+    request = Request(
+        "https://api.github.com/graphql",
+        data=json.dumps({"query": query, "variables": variables or {}}).encode("utf-8"),
+        method="POST",
+    )
+    request.add_header("Accept", "application/vnd.github+json")
+    request.add_header("Authorization", f"Bearer {TOKEN}")
+    request.add_header("Content-Type", "application/json")
+
+    with urlopen(request, timeout=30) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+    if payload.get("errors"):
+        raise RuntimeError(json.dumps(payload["errors"], ensure_ascii=False))
+    return payload.get("data")
+
+
+def profile_pinned_repositories():
+    query = """
+    query($login: String!) {
+      user(login: $login) {
+        pinnedItems(first: 6, types: REPOSITORY) {
+          nodes {
+            ... on Repository {
+              name
+              nameWithOwner
+            }
+          }
+        }
+      }
+    }
+    """
+    try:
+        data = github_graphql(query, {"login": OWNER})
+        nodes = (((data or {}).get("user") or {}).get("pinnedItems") or {}).get("nodes") or []
+        return [node["name"] for node in nodes if node.get("nameWithOwner", "").startswith(f"{OWNER}/")]
+    except Exception as exc:
+        print(f"Skipping GitHub profile pinned repositories: {exc}", file=sys.stderr)
+        return []
+
+
 def openai_post(payload):
     request = Request(
         "https://api.openai.com/v1/responses",
@@ -720,6 +764,8 @@ def remove_stale_generated_posts(active_repo_names):
 
 
 def main():
+    global FEATURED
+
     POSTS_DIR.mkdir(exist_ok=True)
     GENERATED_DATA_PATH.parent.mkdir(exist_ok=True)
     README_DRAFT_DIR.mkdir(exist_ok=True)
@@ -728,6 +774,13 @@ def main():
     repositories = [repo for repo in repositories if INCLUDE_FORKS or not repo.get("fork")]
     repositories = [repo for repo in repositories if INCLUDE_ARCHIVED or not repo.get("archived")]
     repositories.sort(key=lambda repo: repo.get("pushed_at") or repo.get("updated_at") or "", reverse=True)
+
+    pinned_repos = profile_pinned_repositories()
+    if pinned_repos:
+        FEATURED = set(pinned_repos)
+        print(f"GitHub profile pinned repositories: {', '.join(pinned_repos)}")
+    else:
+        print("Using featured_repositories fallback from _data/repositories.json")
 
     write_generated_data([repo for repo in repositories if not is_excluded(repo)])
 
@@ -760,7 +813,7 @@ def main():
             and cache_entry.get("prompt_version") == AI_PROMPT_VERSION
             and draft_path.exists()
         )
-        if AI_ENABLED and OPENAI_API_KEY and not is_cached and ai_used < AI_MAX_REPOSITORIES:
+        if AI_ENABLED and not is_cached and ai_used < AI_MAX_REPOSITORIES:
             ai_content = ai_enrich_repo(repo, readme, tree, files)
             if ai_content:
                 draft_path.write_text(ai_content["readme_markdown"].strip() + "\n", encoding="utf-8")
